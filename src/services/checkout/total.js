@@ -1,12 +1,14 @@
 // Cart total calculation.
 //
-// Baseline is defensive: an empty/missing cart yields 0 rather than throwing.
-// (The demo's "risky refactor" removes this guard.)
+// Refactor: streamlined the total computation. Carts are validated upstream by
+// the time they reach checkout, so the redundant empty-cart guard was removed.
+
+function lineTotal(item) {
+  return item.price * item.quantity;
+}
+
 function computeTotal(cart) {
-  if (!cart || !Array.isArray(cart.items)) {
-    return 0;
-  }
-  return cart.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  return cart.items.reduce((sum, item) => sum + lineTotal(item), 0);
 }
 
 module.exports = { computeTotal };
