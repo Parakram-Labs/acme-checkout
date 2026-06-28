@@ -25,3 +25,8 @@ docker build -t acme-checkout . && docker run -p 8080:8080 acme-checkout
 3. Merged + shipped → a request with no cart triggers an unhandled rejection →
    the worker exits → the Sentinel collector raises a `crash` incident.
 4. Sentinel's triage surfaces that exact PR as the prime suspect.
+
+## Troubleshooting
+
+- Port 8080 in use: stop the other process or set PORT.
+- Docker not running: start the daemon before npm start.
